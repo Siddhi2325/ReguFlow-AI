@@ -1,0 +1,462 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Geist:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   ENTERPRISE THEME SYSTEM — Light Mode (Default)
+   ============================================================ */
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    
+    /* Premium Fintech Blue */
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.75rem;
+    
+    --success: 142.1 76.2% 36.3%;
+    --warning: 38 92% 50%;
+    --info: 199 89% 48%;
+    
+    --risk-critical: 0 84.2% 60.2%;
+    --risk-high: 24 95% 50%;
+    --risk-medium: 38 92% 50%;
+    --risk-low: 142.1 76.2% 36.3%;
+    
+    /* Sidebar */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 215.4 16.3% 46.9%;
+    --sidebar-border: 214.3 31.8% 91.4%;
+    --sidebar-primary: 221.2 83.2% 53.3%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 210 40% 96.1%;
+    --sidebar-accent-foreground: 222.2 47.4% 11.2%;
+    
+    /* Glass / Layering styles (Light Mode) */
+    --glass-bg: rgba(255, 255, 255, 0.75);
+    --glass-border: rgba(15, 23, 42, 0.08);
+    --glass-glow: rgba(59, 130, 246, 0.05);
+    --card-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.03);
+    --card-shadow-hover: 0 8px 30px rgba(59, 130, 246, 0.08), 0 2px 8px rgba(0,0,0,0.04);
+  }
+
+  /* ============================================================
+     ENTERPRISE THEME SYSTEM — Dark Mode (Class based)
+     ============================================================ */
+
+  .dark {
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+    --card: 222 47% 6%;
+    --card-foreground: 213 31% 91%;
+    --popover: 222 47% 6%;
+    --popover-foreground: 213 31% 91%;
+    
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 7%;
+    
+    --secondary: 217 33% 14%;
+    --secondary-foreground: 213 31% 91%;
+    --muted: 217 33% 11%;
+    --muted-foreground: 215 20% 55%;
+    --accent: 217 91% 60%;
+    --accent-foreground: 222 47% 7%;
+    
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 217 33% 15%;
+    --input: 217 33% 15%;
+    --ring: 217 91% 60%;
+    
+    --success: 158 64% 52%;
+    --warning: 37 92% 55%;
+    --info: 199 89% 48%;
+    
+    --risk-critical: 0 72% 55%;
+    --risk-high: 24 95% 55%;
+    --risk-medium: 37 92% 55%;
+    --risk-low: 158 64% 52%;
+    
+    /* Sidebar */
+    --sidebar-background: 224 71% 3%;
+    --sidebar-foreground: 215 20% 65%;
+    --sidebar-border: 217 33% 12%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 222 47% 5%;
+    --sidebar-accent: 217 91% 60%;
+    --sidebar-accent-foreground: 222 47% 5%;
+    
+    /* Glass / Layering styles (Dark Mode) */
+    --glass-bg: rgba(13, 18, 32, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.06);
+    --glass-glow: rgba(59, 130, 246, 0.15);
+    --card-shadow: 0 4px 24px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.02);
+    --card-shadow-hover: 0 12px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(59,130,246,0.18), inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+
+  html { 
+    color-scheme: light; 
+    transition: color-scheme 0.3s ease;
+  }
+  
+  html.dark { 
+    color-scheme: dark; 
+  }
+
+  * { @apply border-border box-border; }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Ambient background glow grid */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 20% -10%, rgba(59,130,246,0.05) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 30% at 85% 100%, rgba(139,92,246,0.03) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+    transition: background 0.3s ease;
+  }
+  
+  html.dark body::before {
+    background:
+      radial-gradient(ellipse 80% 50% at 20% -10%, rgba(59,130,246,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 110%, rgba(139,92,246,0.05) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 30% at 50% 50%, rgba(6,182,212,0.02) 0%, transparent 50%);
+  }
+
+  #root { position: relative; z-index: 1; }
+
+  h1, h2, h3, h4, h5, h6 { 
+    @apply tracking-tight font-semibold text-foreground; 
+    transition: color 0.3s ease;
+  }
+
+  code, kbd, pre { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+}
+
+/* ============================================================
+   COMPONENT LAYER — Design System Classes
+   ============================================================ */
+
+@layer components {
+
+  /* ─── Premium Redesigned Cards ─── */
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    box-shadow: var(--card-shadow);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glass-card:hover {
+    border-color: rgba(59, 130, 246, 0.25);
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  /* ─── Form Inputs ─── */
+  .premium-input {
+    @apply w-full text-sm rounded-lg px-4 py-2.5 transition-all duration-200 border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/80;
+    border-color: var(--glass-border);
+  }
+
+  .premium-select {
+    @apply w-full text-sm rounded-lg px-3 py-2.5 transition-all duration-200 border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/80;
+    border-color: var(--glass-border);
+  }
+
+  /* ─── Modern Data Grid Table ─── */
+  .data-table { 
+    @apply w-full text-sm border-collapse text-foreground;
+  }
+
+  .data-table thead tr {
+    background: hsl(var(--muted));
+    border-bottom: 1px solid var(--glass-border);
+  }
+
+  .data-table th {
+    @apply text-left px-4 py-3.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground;
+  }
+
+  .data-table tbody tr {
+    border-bottom: 1px solid var(--glass-border);
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .data-table tbody tr:last-child { border-bottom: none; }
+
+  .data-table tbody tr:hover {
+    background: rgba(59, 130, 246, 0.04);
+  }
+
+  .data-table td { @apply px-4 py-3.5 align-middle; }
+
+  /* ─── Premium Custom Badges ─── */
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border transition-colors;
+  }
+  
+  .badge-high { 
+    background: rgba(239, 68, 68, 0.08); 
+    color: hsl(var(--risk-high)); 
+    border-color: rgba(239, 68, 68, 0.15); 
+  }
+  .badge-medium { 
+    background: rgba(245, 158, 11, 0.08); 
+    color: hsl(var(--risk-medium)); 
+    border-color: rgba(245, 158, 11, 0.15); 
+  }
+  .badge-low { 
+    background: rgba(16, 185, 129, 0.08); 
+    color: hsl(var(--risk-low)); 
+    border-color: rgba(16, 185, 129, 0.15); 
+  }
+  .badge-critical { 
+    background: rgba(220, 38, 38, 0.1); 
+    color: hsl(var(--risk-critical)); 
+    border-color: rgba(220, 38, 38, 0.2); 
+  }
+  .badge-info { 
+    background: rgba(59, 130, 246, 0.08); 
+    color: hsl(var(--primary)); 
+    border-color: rgba(59, 130, 246, 0.15); 
+  }
+
+  /* ─── Scrollbar Customization ─── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { 
+    background: rgba(100, 116, 139, 0.2); 
+    border-radius: 9999px; 
+    transition: background 0.2s ease;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(100, 116, 139, 0.4); }
+
+  /* ─── Score Rings & Gauges ─── */
+  .score-ring-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .score-ring-fill {
+    fill: none;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+/* ============================================================
+   UTILITIES — Dynamic Bento & Spatial Design
+   ============================================================ */
+
+@layer utilities {
+  .animate-fade-in { animation: fade-in 0.4s ease-out both; }
+  .animate-fade-in-up { animation: fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .animate-scale-in { animation: scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  
+  .delay-75  { animation-delay: 75ms; }
+  .delay-150 { animation-delay: 150ms; }
+  .delay-225 { animation-delay: 225ms; }
+  .delay-300 { animation-delay: 300ms; }
+
+  /* Bento Grid helpers */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .divider { 
+    height: 1px; 
+    background: linear-gradient(90deg, transparent, var(--glass-border), transparent); 
+  }
+  
+  .divider-v { 
+    width: 1px; 
+    background: linear-gradient(180deg, transparent, var(--glass-border), transparent); 
+  }
+}
+
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ============================================================
+   SIDEBAR & NAV STYLES
+   ============================================================ */
+
+.sidebar-enterprise {
+  background: hsl(var(--sidebar-background));
+  border-right: 1px solid var(--sidebar-border);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+}
+
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: hsl(var(--sidebar-foreground));
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  text-decoration: none;
+}
+
+.sidebar-nav-item:hover {
+  color: hsl(var(--foreground));
+  background: hsl(var(--sidebar-accent) / 0.7);
+}
+
+.sidebar-nav-item.active {
+  color: hsl(var(--foreground));
+  background: hsl(var(--sidebar-accent));
+  font-weight: 600;
+  border: 1px solid var(--glass-border);
+}
+
+.sidebar-nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3.5px;
+  height: 50%;
+  background: hsl(var(--primary));
+  border-radius: 0 4px 4px 0;
+}
+
+.sidebar-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  padding: 0 14px;
+}
+
+/* ============================================================
+   TOPBAR STYLES
+   ============================================================ */
+
+.topbar-enterprise {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--glass-border);
+  height: 64px;
+  transition: background-color 0.3s ease;
+}
+
+/* ============================================================
+   RECHARTS OVERRIDES
+   ============================================================ */
+
+.recharts-cartesian-grid line { 
+  stroke: var(--glass-border); 
+}
+.recharts-xAxis .recharts-cartesian-axis-tick text,
+.recharts-yAxis .recharts-cartesian-axis-tick text { 
+  fill: var(--muted-foreground); 
+  font-size: 11px; 
+}
+.recharts-default-tooltip {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--card-shadow) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+/* ============================================================
+   PRINT AND ACCESSIBILITY
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in, .animate-fade-in-up, .animate-scale-in { 
+    animation: none !important; 
+  }
+  .glass-card, .sidebar-enterprise, .sidebar-nav-item { 
+    transition: none !important; 
+    transform: none !important; 
+  }
+}
+
+@media print {
+  aside, header, .no-print, button, .tabs-list { display: none !important; }
+  main { padding: 0 !important; background: white !important; }
+  body { background: white !important; color: black !important; }
+  .glass-card {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+}
