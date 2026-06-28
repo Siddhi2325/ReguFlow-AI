@@ -2,16 +2,41 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || '';
+const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || '';
 
-// Import the supabase client like this:
-// import { supabase } from "@/integrations/supabase/client";
+const isConfigured = Boolean(SUPABASE_URL && SUPABASE_PUBLISHABLE_KEY);
 
-export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
-  auth: {
-    storage: localStorage,
-    persistSession: true,
-    autoRefreshToken: true,
-  }
-});
+if (!isConfigured) {
+  console.warn(
+    "Supabase configuration is missing. " +
+    "Local authenticated operations will be disabled. " +
+    "Please configure VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY in your deployment environment."
+  );
+}
+
+// Export a robust client instance or a mock Proxy fallback to prevent runtime crashes
+export const supabase = isConfigured
+  ? createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+      auth: {
+        storage: typeof window !== 'undefined' ? localStorage : undefined,
+        persistSession: true,
+        autoRefreshToken: true,
+      }
+    })
+  : new Proxy({} as any, {
+      get(target, prop) {
+        // Return custom mocks or mock functions to bypass client crashes
+        if (prop === 'auth') {
+          return {
+            onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => {} } } }),
+            getSession: () => Promise.resolve({ data: { session: null }, error: null }),
+            getUser: () => Promise.resolve({ data: { user: null }, error: null }),
+          };
+        }
+        return () => {
+          console.warn(`Supabase database method "${String(prop)}" called, but credentials are not configured.`);
+          return Promise.resolve({ data: null, error: new Error("Supabase is not configured") });
+        };
+      }
+    });
