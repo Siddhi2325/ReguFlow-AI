@@ -22,9 +22,9 @@ export default function Logo({ size = "md", theme = "default", className, onClic
   };
 
   const heightClasses = {
-    sm: "h-8",     // 32px
-    md: "h-11",    // 44px
-    lg: "h-14",    // 56px
+    sm: "h-12",    // 48px
+    md: "h-16",    // 64px
+    lg: "h-24",    // 96px
   };
 
   const height = heightClasses[size] || heightClasses.md;
@@ -35,7 +35,7 @@ export default function Logo({ size = "md", theme = "default", className, onClic
         onClick={handleClick}
         className={cn(
           "flex items-center justify-center cursor-pointer select-none overflow-hidden rounded-lg",
-          size === "sm" ? "w-8 h-8" : size === "lg" ? "w-14 h-14" : "w-11 h-11",
+          size === "sm" ? "w-12 h-12" : size === "lg" ? "w-24 h-24" : "w-16 h-16",
           className
         )}
       >
