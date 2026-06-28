@@ -83,7 +83,8 @@ export default function Landing() {
       link.target = "_blank";
       link.rel = "noopener noreferrer";
     } else {
-      link.setAttribute("download", "");
+      const filename = platform === "windows" ? "ReguFlow AI.exe" : "";
+      link.setAttribute("download", filename);
     }
     document.body.appendChild(link);
     link.click();
